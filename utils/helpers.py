@@ -13,10 +13,9 @@ except ImportError:
     _crop_recommendation = None
 
 try:
-    from data.weather import fetch_weather_data as _fetch_weather_data
+    from weather.weather_api import get_weather_data as _fetch_weather_data
 except ImportError:
     _fetch_weather_data = None
-
 try:
     from data.market import fetch_market_prices as _fetch_market_prices
 except ImportError:
