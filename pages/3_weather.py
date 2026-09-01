@@ -4,7 +4,8 @@ import pandas as pd
 import streamlit as st
 
 from ui_theme import inject_global_theme, render_hero_image
-from utils.helpers import fetch_weather_data, render_integration_badges
+from utils.helpers import render_integration_badges
+from weather.weather_api import get_weather_data
 from utils.translations import render_language_selector, t
 
 
@@ -53,7 +54,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 def get_mock_weather_data(location: str) -> dict:
     """Return weather data for the selected location."""
-    return fetch_weather_data(location)
+    weather_data = get_weather_data(location)
+
+    if "error" in weather_data:
+        return weather_data
+
+    weather_data["current"]["location"] = location
+
+    return weather_data
 
 
 def page_available(page_path: str) -> bool:
@@ -115,37 +123,63 @@ def render_current_weather(weather_data: dict) -> None:
     current = weather_data["current"]
 
     with st.container(border=True):
-        st.subheader(t("current_weather", location=current["location"]))
+        st.subheader(t("current_weather", location=current.get("location", "Unknown")))
         hero_cols = st.columns([1.2, 1, 1, 1], gap="large")
 
-        hero_cols[0].metric(current["condition"], f"{current['temperature_c']}°C", t("feels_like", temp=current["feels_like_c"]))
-        hero_cols[1].metric(t("humidity"), current["humidity"])
-        hero_cols[2].metric(t("wind"), current["wind"])
-        hero_cols[3].metric(t("rain_chance"), current["rain_chance"])
+        hero_cols[0].metric(
+            current.get("condition", current.get("description", "Unknown")),
+            f"{current.get('temperature_c', current.get('temperature', 0))}°C",
+            t("feels_like", temp=current.get("feels_like_c", current.get("feels_like", 0))),
+        )
+        hero_cols[1].metric(t("humidity"), current.get("humidity", "N/A"))
+        hero_cols[2].metric(("wind"), current.get("wind_speed", "N/A"))
+        hero_cols[3].metric(("rain_chance"), "See forecast")
 
-        st.info(t(current["farm_note_key"]))
+        st.info(t(current.get("farm_note_key", "")) or "")
 
 
 def render_five_day_forecast(weather_data: dict) -> None:
     """Render a 5-day forecast card layout."""
-    st.subheader(t("five_day_forecast"))
+    st.subheader(("five_day_forecast"))
+
     forecast_columns = st.columns(5)
 
-    for column, day in zip(forecast_columns, weather_data["forecast"]):
+    for column, day in zip(forecast_columns, weather_data.get("forecast", [])):
         with column:
             with st.container(border=True):
-                st.write(f"**{day['day']}**")
-                st.write(day["condition"])
-                st.metric(t("high_low"), f"{day['high_c']}° / {day['low_c']}°C")
-                st.caption(t("rain_chance_caption", chance=day["rain_chance"]))
 
+                st.write(f"**{day.get('datetime', 'Unknown')}**")
+
+                st.write(day.get("description", "Unknown"))
+
+                st.metric(
+                    "Temperature",
+                    f"{day.get('temperature', 'N/A')}°C"
+                )
+
+                st.caption(
+                    f"Rain chance: {day.get('rain_probability', 0):.0f}%"
+                )
 
 def render_weather_chart(weather_data: dict) -> None:
     """Render the 24-hour temperature and rain trend placeholder."""
     st.subheader(t("weather_chart_title"))
     with st.container(border=True):
-        st.line_chart(weather_data["hourly"])
-        st.caption(t("weather_chart_caption"))
+        forecast = weather_data.get("forecast", [])
+
+        if forecast:
+            chart_data = {
+                "Temperature": [
+                    item.get("temperature", 0)
+                    for item in forecast
+                ]
+            }
+
+            st.line_chart(chart_data)
+        else:
+            st.info("Weather trend data unavailable.")
+
+    st.caption(t("weather_chart_caption"))
 
 
 def render_weather_page() -> None:
