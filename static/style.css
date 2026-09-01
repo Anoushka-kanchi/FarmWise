@@ -1,0 +1,1071 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: #f5f8f1;
+
+    color: #263b29;
+
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+
+    height: 72px;
+
+    padding: 0 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: white;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    box-shadow:
+        0 3px 20px
+        rgba(0,0,0,.06);
+
+}
+
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #2f7035;
+
+}
+
+
+nav a {
+
+    color: #355b39;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+}
+
+
+
+/* =========================
+   ROLE PAGE
+========================= */
+
+.role-page {
+
+    min-height:
+        calc(100vh - 72px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 70px 7%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf4e2,
+            #f8fbf5
+        );
+
+}
+
+
+.role-content {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    text-align: center;
+
+    animation:
+        appear .9s ease;
+
+}
+
+
+.tagline {
+
+    color: #599258;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.role-content h1 {
+
+    font-size: 60px;
+
+    line-height: 1.1;
+
+    color: #244c2a;
+
+}
+
+
+.role-content h1 span {
+
+    color: #679b55;
+
+}
+
+
+.role-content > p {
+
+    color: #718073;
+
+    margin: 20px 0 45px;
+
+    font-size: 17px;
+
+}
+
+
+.role-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+
+}
+
+
+.role-card {
+
+    display: grid;
+
+    grid-template-columns:
+        180px 1fr;
+
+    text-align: left;
+
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    box-shadow:
+        0 12px 35px
+        rgba(42,76,43,.1);
+
+    transition:
+        transform .4s,
+        box-shadow .4s;
+
+}
+
+
+.role-card:hover {
+
+    transform:
+        translateY(-10px);
+
+    box-shadow:
+        0 25px 50px
+        rgba(42,76,43,.16);
+
+}
+
+
+.role-card img {
+
+    width: 180px;
+
+    height: 230px;
+
+    object-fit: cover;
+
+}
+
+
+.role-card div {
+
+    padding: 30px;
+
+}
+
+
+.role-card h2 {
+
+    color: #2e7135;
+
+    margin-bottom: 12px;
+
+}
+
+
+.role-card p {
+
+    color: #718073;
+
+    line-height: 1.6;
+
+}
+
+
+.role-card span {
+
+    display: block;
+
+    margin-top: 20px;
+
+    color: #3d803f;
+
+    font-weight: 700;
+
+}
+
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 80px 6%;
+
+}
+
+
+.dashboard-container {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+
+    align-items: flex-start;
+
+    margin-bottom: 60px;
+
+}
+
+
+.dashboard-image {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+.dashboard-crop-image {
+
+    width: 100%;
+
+    height: 300px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(42,76,43,.15);
+
+}
+
+
+.image-caption {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+
+}
+
+
+.image-caption h3 {
+
+    color: #244c2a;
+
+    margin-bottom: 8px;
+
+    font-size: 18px;
+
+}
+
+
+.image-caption p {
+
+    color: #748176;
+
+    font-size: 14px;
+
+    margin: 0;
+
+}
+
+
+.dashboard-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 40px;
+
+}
+
+
+.dashboard-header {
+
+    text-align: left;
+
+    margin-bottom: 0;
+
+}
+
+
+.dashboard-header h1 {
+
+    font-size: 40px;
+
+    color: #244c2a;
+
+    margin: 15px 0 10px 0;
+
+}
+
+
+.dashboard-header p:first-child {
+
+    color: #748176;
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    font-size: 12px;
+
+}
+
+
+.dashboard-header p:last-child {
+
+    color: #748176;
+
+    margin-top: 10px;
+
+}
+
+
+.farmer-options {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+
+}
+
+
+.dashboard-card {
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    box-shadow:
+        0 12px 35px
+        rgba(42,76,43,.08);
+
+    transition: .4s;
+
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+}
+
+
+.dashboard-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 20px 45px
+        rgba(42,76,43,.15);
+
+}
+
+
+.big-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.dashboard-card h2 {
+
+    color: #2e7135;
+
+    margin-bottom: 15px;
+
+}
+
+
+.dashboard-card p {
+
+    color: #748176;
+
+    line-height: 1.7;
+
+}
+
+
+.dashboard-card span {
+
+    display: block;
+
+    margin-top: 25px;
+
+    color: #3d803f;
+
+    font-weight: 700;
+
+}
+
+
+.my-listings {
+
+    margin-top: 80px;
+
+}
+
+
+.my-listings h2 {
+
+    margin-bottom: 25px;
+
+}
+
+
+.listing-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.listing-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,.06);
+
+}
+
+
+.listing-card h3 {
+
+    color: #35713a;
+
+    margin-bottom: 10px;
+
+}
+
+
+.listing-card p {
+
+    color: #748176;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+/* =========================
+   FORMS
+========================= */
+
+.form-page {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 80px 6%;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+}
+
+
+.form-image img {
+
+    width: 100%;
+
+    height: 520px;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.12);
+
+}
+
+
+.form-container h1 {
+
+    font-size: 50px;
+
+    color: #244c2a;
+
+    margin-bottom: 15px;
+
+}
+
+
+.form-container > p:not(.tagline) {
+
+    color: #718073;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+
+}
+
+
+.form-container form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+.form-container label {
+
+    font-weight: 600;
+
+    color: #3e5941;
+
+    margin-top: 8px;
+
+}
+
+
+.form-container input {
+
+    padding: 15px;
+
+    border: 1px solid #d9e4d6;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 15px;
+
+}
+
+
+.form-container input:focus {
+
+    border-color: #65965a;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(101,150,90,.12);
+
+}
+
+
+.form-container button,
+.crop-bottom button {
+
+    border: none;
+
+    background: #3b7d40;
+
+    color: white;
+
+    padding: 14px 20px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition: .3s;
+
+}
+
+
+.form-container button {
+
+    margin-top: 18px;
+
+}
+
+
+.form-container button:hover,
+.crop-bottom button:hover {
+
+    background: #285f2d;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+
+/* =========================
+   CONSUMER
+========================= */
+
+.consumer-page {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 80px 6%;
+
+}
+
+
+.consumer-heading {
+
+    text-align: center;
+
+    margin-bottom: 55px;
+
+}
+
+
+.consumer-heading h1 {
+
+    font-size: 48px;
+
+    color: #244c2a;
+
+}
+
+
+.consumer-heading p:last-child {
+
+    color: #718073;
+
+    margin-top: 12px;
+
+}
+
+
+.crop-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+}
+
+
+.crop-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.07);
+
+    transition: .4s;
+
+    animation:
+        cardAppear .7s ease both;
+
+}
+
+
+.crop-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 20px 40px
+        rgba(0,0,0,.12);
+
+}
+
+
+.crop-image {
+
+    height: 220px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.crop-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .5s;
+
+}
+
+
+.crop-card:hover
+.crop-image img {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+.crop-image span {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 15px;
+
+    background: white;
+
+    color: #37733c;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.crop-info {
+
+    padding: 23px;
+
+}
+
+
+.crop-info h2 {
+
+    color: #2f6534;
+
+    margin-bottom: 10px;
+
+}
+
+
+.crop-info p {
+
+    color: #758177;
+
+    margin-bottom: 10px;
+
+}
+
+
+.farmer-name {
+
+    color: #5c8d58 !important;
+
+}
+
+
+.crop-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+}
+
+
+.crop-price {
+
+    color: #317238;
+
+    font-size: 22px;
+
+}
+
+
+.empty {
+
+    text-align: center;
+
+    padding: 80px;
+
+    background: white;
+
+    border-radius: 20px;
+
+}
+
+
+.product-icon {
+
+    height: 180px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #edf5e9;
+
+    font-size: 70px;
+
+}
+
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes appear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px) {
+
+    .role-cards,
+    .farmer-options,
+    .form-page,
+    .dashboard-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .crop-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .listing-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width:550px) {
+
+    .role-content h1,
+    .consumer-heading h1,
+    .form-container h1 {
+
+        font-size: 36px;
+
+    }
+
+
+    .role-card {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .role-card img {
+
+        width: 100%;
+
+        height: 200px;
+
+    }
+
+
+    .crop-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

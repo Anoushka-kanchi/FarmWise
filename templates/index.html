@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>FarmWise Marketplace</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        🌱 FarmWise
+    </div>
+
+</nav>
+
+
+<section class="role-page">
+
+    <div class="role-content">
+
+        <p class="tagline">
+            FARM TO MARKET
+        </p>
+
+        <h1>
+            Welcome to<br>
+            <span>FarmWise</span>
+        </h1>
+
+        <p>
+            A direct marketplace connecting
+            farmers and consumers.
+        </p>
+
+
+        <div class="role-cards">
+
+
+            <!-- FARMER -->
+
+            <a href="{{ url_for('farmer') }}"
+               class="role-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=500&h=400&fit=crop"
+                    alt="Farmer selling crops">
+
+                <div>
+
+                    <h2>
+                        🌾 Farmer
+                    </h2>
+
+                    <p>
+                        Sell your crops at
+                        your desired price
+                        and buy farming products.
+                    </p>
+
+                    <span>
+                        Enter Farmer Portal →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- CONSUMER -->
+
+            <a href="{{ url_for('consumer') }}"
+               class="role-card">
+
+                <img
+                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&h=400&fit=crop"
+                    alt="Consumer shopping for fresh crops">
+
+                <div>
+
+                    <h2>
+                        🛒 Consumer
+                    </h2>
+
+                    <p>
+                        Discover fresh crops
+                        directly from farmers.
+                    </p>
+
+                    <span>
+                        Enter Consumer Portal →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

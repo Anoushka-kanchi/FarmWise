@@ -1,0 +1,1327 @@
+```html
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Farming Store | FarmDirect</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* ==========================================
+           FARMER BUY PAGE
+        ========================================== */
+
+        .store-page {
+
+            min-height: calc(100vh - 72px);
+
+            padding: 60px 7% 80px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f8f0,
+                    #fbfdf9
+                );
+
+        }
+
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .store-header {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            text-align: center;
+
+            animation:
+                storeAppear .7s ease;
+
+        }
+
+
+        .store-header h1 {
+
+            font-size: 48px;
+
+            color: #244c2a;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .store-header p {
+
+            color: #718073;
+
+            font-size: 17px;
+
+            max-width: 650px;
+
+            margin: auto;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* ==========================================
+           SEARCH
+        ========================================== */
+
+        .search-container {
+
+            max-width: 650px;
+
+            margin: 35px auto;
+
+            position: relative;
+
+        }
+
+
+        .search-container input {
+
+            width: 100%;
+
+            padding: 17px 22px;
+
+            border: 1px solid #d8e4d5;
+
+            border-radius: 50px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: white;
+
+            box-shadow:
+                0 8px 25px
+                rgba(50,90,50,.07);
+
+        }
+
+
+        .search-container input:focus {
+
+            border-color: #609659;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(96,150,89,.10);
+
+        }
+
+
+        /* ==========================================
+           CATEGORIES
+        ========================================== */
+
+        .categories {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 45px;
+
+        }
+
+
+        .category-btn {
+
+            padding: 10px 20px;
+
+            border: 1px solid #cdddc9;
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #416445;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+            transition: .3s;
+
+        }
+
+
+        .category-btn:hover {
+
+            background: #4d874c;
+
+            color: white;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .category-btn.active {
+
+            background: #3d7b42;
+
+            color: white;
+
+            border-color: #3d7b42;
+
+        }
+
+
+        /* ==========================================
+           PRODUCT GRID
+        ========================================== */
+
+        .products-container {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+        }
+
+
+        .product-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+
+        }
+
+
+        /* ==========================================
+           PRODUCT CARD
+        ========================================== */
+
+        .product-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 30px
+                rgba(45,80,45,.08);
+
+            transition:
+                transform .35s,
+                box-shadow .35s;
+
+            animation:
+                cardAppear .7s ease both;
+
+        }
+
+
+        .product-card:hover {
+
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 20px 45px
+                rgba(45,80,45,.14);
+
+        }
+
+
+        /* ==========================================
+           PRODUCT IMAGE
+        ========================================== */
+
+        .product-image {
+
+            height: 220px;
+
+            background: #edf5e9;
+
+            overflow: hidden;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform .5s;
+
+        }
+
+
+        .product-card:hover
+        .product-image img {
+
+            transform:
+                scale(1.08);
+
+        }
+
+
+        .product-placeholder {
+
+            font-size: 75px;
+
+        }
+
+
+        .product-category {
+
+            position: absolute;
+
+            top: 14px;
+
+            left: 14px;
+
+            padding: 7px 12px;
+
+            background: white;
+
+            color: #39703e;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* ==========================================
+           PRODUCT INFORMATION
+        ========================================== */
+
+        .product-info {
+
+            padding: 24px;
+
+        }
+
+
+        .product-info h2 {
+
+            color: #2e6534;
+
+            margin-bottom: 8px;
+
+            font-size: 21px;
+
+        }
+
+
+        .product-description {
+
+            color: #758177;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            min-height: 45px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .product-seller {
+
+            color: #789078;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .product-bottom {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .product-price {
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            color: #347239;
+
+        }
+
+
+        .buy-button {
+
+            border: none;
+
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            background: #3d7b42;
+
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+        }
+
+
+        .buy-button:hover {
+
+            background: #285e2e;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .stock {
+
+            font-size: 12px;
+
+            color: #718073;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        /* ==========================================
+           EMPTY
+        ========================================== */
+
+        .no-products {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 70px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            color: #718073;
+
+        }
+
+
+        /* ==========================================
+           ANIMATIONS
+        ========================================== */
+
+        @keyframes storeAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media(max-width: 900px) {
+
+            .product-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .store-page {
+
+                padding:
+                    40px 5%;
+
+            }
+
+
+            .store-header h1 {
+
+                font-size: 35px;
+
+            }
+
+
+            .product-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+     NAVBAR
+========================================== -->
+
+<nav>
+
+    <div class="logo">
+        🌱 FarmDirect
+    </div>
+
+
+    <a href="{{ url_for('farmer') }}">
+        ← Farmer Dashboard
+    </a>
+
+</nav>
+
+
+
+<!-- ==========================================
+     STORE
+========================================== -->
+
+<section class="store-page">
+
+
+    <div class="store-header">
+
+        <p class="tagline">
+            FARMING STORE
+        </p>
+
+
+        <h1>
+            Everything Your Farm Needs
+        </h1>
+
+
+        <p>
+
+            Buy tractors, insecticides,
+            fertilizers, seeds and farming
+            equipment from trusted sellers.
+
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search tractors, seeds, fertilizers...">
+
+        </div>
+
+
+        <!-- CATEGORIES -->
+
+        <div class="categories">
+
+            <button
+                class="category-btn active"
+                onclick="filterProducts('All', this)">
+
+                All
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterProducts('Tractor', this)">
+
+                🚜 Tractors
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterProducts('Insecticide', this)">
+
+                🧪 Insecticides
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterProducts('Fertilizer', this)">
+
+                🌱 Fertilizers
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterProducts('Seeds', this)">
+
+                🌾 Seeds
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterProducts('Tools', this)">
+
+                🛠️ Tools
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         PRODUCTS
+    =========================================== -->
+
+    <div class="products-container">
+
+
+        <div class="product-grid"
+             id="productGrid">
+
+
+            {% if products %}
+
+
+                {% for product in products %}
+
+
+                <div
+                    class="product-card"
+                    data-category="{{ product.category }}"
+                    data-name="{{ product.name|lower }}">
+
+
+                    <!-- IMAGE -->
+
+                    <div class="product-image">
+
+
+                        {% if product.image %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='uploads/' + product.image
+                                ) }}"
+                                alt="{{ product.name }}">
+
+                        {% else %}
+
+                            <div class="product-placeholder">
+
+                                {% if product.category == "Tractor" %}
+                                    🚜
+
+                                {% elif product.category == "Insecticide" %}
+                                    🧪
+
+                                {% elif product.category == "Fertilizer" %}
+                                    🌱
+
+                                {% elif product.category == "Seeds" %}
+                                    🌾
+
+                                {% else %}
+                                    🛠️
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <span class="product-category">
+
+                            {{ product.category }}
+
+                        </span>
+
+
+                    </div>
+
+
+                    <!-- INFORMATION -->
+
+                    <div class="product-info">
+
+
+                        <h2>
+                            {{ product.name }}
+                        </h2>
+
+
+                        <p class="product-description">
+
+                            {{ product.description
+                               or
+                               "Quality farming product for your agricultural needs." }}
+
+                        </p>
+
+
+                        {% if product.seller %}
+
+                        <p class="product-seller">
+
+                            Seller:
+                            <strong>
+                                {{ product.seller }}
+                            </strong>
+
+                        </p>
+
+                        {% endif %}
+
+
+                        <p class="stock">
+
+                            {% if product.stock > 0 %}
+
+                                ✓ {{ product.stock }} available
+
+                            {% else %}
+
+                                Currently unavailable
+
+                            {% endif %}
+
+                        </p>
+
+
+                        <div class="product-bottom">
+
+
+                            <span class="product-price">
+
+                                ₹{{ product.price }}
+
+                            </span>
+
+
+                            {% if product.stock > 0 %}
+
+                            <button
+                                class="buy-button"
+                                onclick="buyProduct(
+                                    '{{ product.name }}',
+                                    '{{ product.price }}'
+                                )">
+
+                                Buy Now
+
+                            </button>
+
+                            {% else %}
+
+                            <button
+                                class="buy-button"
+                                disabled>
+
+                                Out of Stock
+
+                            </button>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <!-- ==================================
+                     DEMO PRODUCTS
+                =================================== -->
+
+
+                <div
+                    class="product-card"
+                    data-category="Tractor"
+                    data-name="mini tractor">
+
+
+                    <div class="product-image">
+
+                        <div class="product-placeholder">
+                            🚜
+                        </div>
+
+                        <span class="product-category">
+                            Tractor
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h2>
+                            Mini Tractor
+                        </h2>
+
+                        <p class="product-description">
+
+                            Compact tractor suitable
+                            for small and medium farms.
+
+                        </p>
+
+
+                        <p class="stock">
+                            ✓ Available
+                        </p>
+
+
+                        <div class="product-bottom">
+
+                            <span class="product-price">
+                                ₹85,000
+                            </span>
+
+                            <button
+                                class="buy-button"
+                                onclick="buyProduct(
+                                    'Mini Tractor',
+                                    '85000'
+                                )">
+
+                                Buy Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="product-card"
+                    data-category="Insecticide"
+                    data-name="crop insecticide">
+
+
+                    <div class="product-image">
+
+                        <div class="product-placeholder">
+                            🧪
+                        </div>
+
+                        <span class="product-category">
+                            Insecticide
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h2>
+                            Crop Insecticide
+                        </h2>
+
+                        <p class="product-description">
+
+                            Crop protection product
+                            for pest management.
+
+                        </p>
+
+
+                        <p class="stock">
+                            ✓ Available
+                        </p>
+
+
+                        <div class="product-bottom">
+
+                            <span class="product-price">
+                                ₹850
+                            </span>
+
+                            <button
+                                class="buy-button"
+                                onclick="buyProduct(
+                                    'Crop Insecticide',
+                                    '850'
+                                )">
+
+                                Buy Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="product-card"
+                    data-category="Fertilizer"
+                    data-name="organic fertilizer">
+
+
+                    <div class="product-image">
+
+                        <div class="product-placeholder">
+                            🌱
+                        </div>
+
+                        <span class="product-category">
+                            Fertilizer
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h2>
+                            Organic Fertilizer
+                        </h2>
+
+                        <p class="product-description">
+
+                            Organic fertilizer for
+                            healthier soil and crops.
+
+                        </p>
+
+
+                        <p class="stock">
+                            ✓ Available
+                        </p>
+
+
+                        <div class="product-bottom">
+
+                            <span class="product-price">
+                                ₹650
+                            </span>
+
+                            <button
+                                class="buy-button"
+                                onclick="buyProduct(
+                                    'Organic Fertilizer',
+                                    '650'
+                                )">
+
+                                Buy Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div
+                    class="product-card"
+                    data-category="Seeds"
+                    data-name="premium seeds">
+
+
+                    <div class="product-image">
+
+                        <div class="product-placeholder">
+                            🌾
+                        </div>
+
+                        <span class="product-category">
+                            Seeds
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h2>
+                            Premium Seeds
+                        </h2>
+
+                        <p class="product-description">
+
+                            High quality seeds for
+                            improved crop production.
+
+                        </p>
+
+
+                        <p class="stock">
+                            ✓ Available
+                        </p>
+
+
+                        <div class="product-bottom">
+
+                            <span class="product-price">
+                                ₹450
+                            </span>
+
+                            <button
+                                class="buy-button"
+                                onclick="buyProduct(
+                                    'Premium Seeds',
+                                    '450'
+                                )">
+
+                                Buy Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <div
+            class="no-products"
+            id="noProducts">
+
+            <h2>
+                No products found
+            </h2>
+
+            <p>
+                Try another search or category.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ==========================================
+     JAVASCRIPT
+========================================== -->
+
+<script>
+
+    let selectedCategory = "All";
+
+
+    /* =========================================
+       CATEGORY FILTER
+    ========================================= */
+
+    function filterProducts(
+        category,
+        button
+    ) {
+
+        selectedCategory = category;
+
+
+        document
+            .querySelectorAll(".category-btn")
+            .forEach(
+                btn =>
+                btn.classList.remove("active")
+            );
+
+
+        button.classList.add("active");
+
+
+        filterAndSearch();
+
+    }
+
+
+
+    /* =========================================
+       SEARCH
+    ========================================= */
+
+    document
+        .getElementById("searchInput")
+        .addEventListener(
+            "input",
+            filterAndSearch
+        );
+
+
+    function filterAndSearch() {
+
+        const search =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+
+        const cards =
+            document
+                .querySelectorAll(".product-card");
+
+
+        let visible = 0;
+
+
+        cards.forEach(
+            card => {
+
+                const category =
+                    card
+                        .dataset
+                        .category;
+
+
+                const name =
+                    card
+                        .dataset
+                        .name;
+
+
+                const categoryMatch =
+                    selectedCategory === "All"
+                    ||
+                    category === selectedCategory;
+
+
+                const searchMatch =
+                    name.includes(search);
+
+
+                if (
+                    categoryMatch
+                    &&
+                    searchMatch
+                ) {
+
+                    card.style.display =
+                        "block";
+
+                    visible++;
+
+                }
+
+                else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        const noProducts =
+            document.getElementById(
+                "noProducts"
+            );
+
+
+        if (visible === 0) {
+
+            noProducts.style.display =
+                "block";
+
+        }
+
+        else {
+
+            noProducts.style.display =
+                "none";
+
+        }
+
+    }
+
+
+
+    /* =========================================
+       BUY PRODUCT
+    ========================================= */
+
+    function buyProduct(
+        productName,
+        price
+    ) {
+
+        const confirmed =
+            confirm(
+                "Buy " +
+                productName +
+                " for ₹" +
+                price +
+                "?"
+            );
+
+
+        if (confirmed) {
+
+            alert(
+                "Order placed successfully!\n\n" +
+                productName +
+                "\n" +
+                "Price: ₹" +
+                price
+            );
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+```
