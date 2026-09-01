@@ -1,3 +1,6 @@
+
+import sqlite3
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 
@@ -187,34 +190,78 @@ def _session_products() -> list[dict]:
     return st.session_state.mock_products
 
 
+DB_PATH = Path(__file__).resolve().parent.parent / "farmwise.db"
+
+
+def _init_marketplace_db():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS marketplace_products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            category TEXT NOT NULL,
+            price REAL NOT NULL,
+            quantity TEXT NOT NULL,
+            seller TEXT NOT NULL,
+            image TEXT,
+            description TEXT NOT NULL
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
 def get_products() -> list[dict]:
-    """Read products from Person 4's database module, with session fallback."""
-    if _db_get_products is not None:
-        try:
-            products = _db_get_products()
-            return list(products or [])
-        except Exception as error:
-            st.warning(f"Database product read failed, using mock data: {error}")
-    return _session_products()
+    """Get all marketplace products from SQLite database."""
+    _init_marketplace_db()
+
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+
+    rows = conn.execute("""
+        SELECT id, title, category, price, quantity,
+               seller, image, description
+        FROM marketplace_products
+        ORDER BY id DESC
+    """).fetchall()
+
+    conn.close()
+
+    return [dict(row) for row in rows]
 
 
 def add_product(product: dict) -> bool:
-    """Write products through Person 4's database module, with session fallback."""
-    if _db_add_product is not None:
-        try:
-            _db_add_product(product)
-            return True
-        except TypeError:
-            try:
-                _db_add_product(**product)
-                return True
-            except Exception as error:
-                st.error(f"Database product save failed: {error}")
-        except Exception as error:
-            st.error(f"Database product save failed: {error}")
+    """Save a marketplace product permanently."""
+    try:
+        _init_marketplace_db()
 
-    _session_products().append(product)
-    return False
+        conn = sqlite3.connect(DB_PATH)
+
+        conn.execute("""
+            INSERT INTO marketplace_products
+            (title, category, price, quantity, seller, image, description)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (
+            product["title"],
+            product["category"],
+            float(product["price"]),
+            product["quantity"],
+            product.get("seller", "Current User"),
+            product.get("image") or product.get("image_name"),
+            product["description"],
+        ))
+
+        conn.commit()
+        conn.close()
+
+        return True
+
+    except Exception as error:
+        st.error(f"Could not save product: {error}")
+        return False
 
 
 def create_order(items: list[dict]) -> bool:
