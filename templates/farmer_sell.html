@@ -1,0 +1,995 @@
+```html
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sell Your Crops | FarmWise</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* =========================================
+           SELL PAGE
+        ========================================= */
+
+        .sell-page {
+
+            min-height: calc(100vh - 72px);
+
+            padding: 60px 7%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef7e9,
+                    #f9fcf7
+                );
+
+        }
+
+
+        .sell-container {
+
+            width: 100%;
+
+            max-width: 1150px;
+
+            display: grid;
+
+            grid-template-columns: 0.9fr 1.1fr;
+
+            gap: 55px;
+
+            align-items: center;
+
+        }
+
+
+        /* =========================================
+           LEFT IMAGE
+        ========================================= */
+
+        .sell-image {
+
+            position: relative;
+
+            animation:
+                slideLeft 0.8s ease;
+
+        }
+
+
+        .sell-image img {
+
+            width: 100%;
+
+            height: 600px;
+
+            object-fit: cover;
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 25px 55px
+                rgba(45, 85, 45, 0.15);
+
+        }
+
+
+        .image-overlay {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 25px;
+
+            right: 25px;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.92);
+
+            backdrop-filter: blur(8px);
+
+        }
+
+
+        .image-overlay h3 {
+
+            color: #2e6935;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .image-overlay p {
+
+            color: #667567;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           FORM CARD
+        ========================================= */
+
+        .sell-form-card {
+
+            background: white;
+
+            padding: 42px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 20px 55px
+                rgba(45, 85, 45, 0.10);
+
+            animation:
+                slideRight 0.8s ease;
+
+        }
+
+
+        .sell-form-card h1 {
+
+            font-size: 43px;
+
+            color: #244c2a;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .sell-description {
+
+            color: #748176;
+
+            line-height: 1.6;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .sell-form {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+
+        }
+
+
+        .sell-form label {
+
+            margin-top: 8px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color: #3e5941;
+
+        }
+
+
+        .sell-form input,
+        .sell-form select,
+        .sell-form textarea {
+
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid #d9e5d6;
+
+            border-radius: 11px;
+
+            outline: none;
+
+            background: #fbfdfb;
+
+            font-size: 15px;
+
+            font-family: inherit;
+
+            transition:
+                border-color .3s,
+                box-shadow .3s;
+
+        }
+
+
+        .sell-form input:focus,
+        .sell-form select:focus,
+        .sell-form textarea:focus {
+
+            border-color: #609659;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(96,150,89,0.10);
+
+            background: white;
+
+        }
+
+
+        .sell-form textarea {
+
+            resize: vertical;
+
+            min-height: 100px;
+
+        }
+
+
+        /* =========================================
+           TWO COLUMN INPUTS
+        ========================================= */
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+        }
+
+
+        /* =========================================
+           IMAGE UPLOAD
+        ========================================= */
+
+        .upload-box {
+
+            border: 2px dashed #b9d2b3;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            text-align: center;
+
+            background: #f8fbf6;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+        }
+
+
+        .upload-box:hover {
+
+            border-color: #609659;
+
+            background: #f0f7ed;
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .upload-icon {
+
+            font-size: 32px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .upload-box p {
+
+            margin: 3px 0;
+
+            color: #567057;
+
+            font-size: 14px;
+
+        }
+
+
+        .upload-box small {
+
+            color: #89968b;
+
+        }
+
+
+        .upload-box input {
+
+            margin-top: 12px;
+
+            border: none;
+
+            background: transparent;
+
+            padding: 5px;
+
+        }
+
+
+        /* =========================================
+           IMAGE PREVIEW
+        ========================================= */
+
+        #imagePreview {
+
+            display: none;
+
+            width: 100%;
+
+            height: 180px;
+
+            object-fit: cover;
+
+            margin-top: 12px;
+
+            border-radius: 12px;
+
+            animation:
+                previewAppear .4s ease;
+
+        }
+
+
+        /* =========================================
+           SUBMIT BUTTON
+        ========================================= */
+
+        .sell-button {
+
+            margin-top: 18px;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4d874c,
+                    #326b39
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+            box-shadow:
+                0 10px 20px
+                rgba(58,113,62,.18);
+
+        }
+
+
+        .sell-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 15px 28px
+                rgba(58,113,62,.25);
+
+        }
+
+
+        .sell-button:active {
+
+            transform:
+                scale(.98);
+
+        }
+
+
+        /* =========================================
+           BACK LINK
+        ========================================= */
+
+        .back-link {
+
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: #4f7f50;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        .back-link:hover {
+
+            color: #285d2e;
+
+        }
+
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+
+        @keyframes slideLeft {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(-40px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+        }
+
+
+        @keyframes slideRight {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(40px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+        }
+
+
+        @keyframes previewAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(.95);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media(max-width: 850px) {
+
+            .sell-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .sell-image {
+
+                display: none;
+
+            }
+
+
+            .sell-form-card {
+
+                padding: 30px 22px;
+
+            }
+
+
+            .sell-form-card h1 {
+
+                font-size: 35px;
+
+            }
+
+        }
+
+
+        @media(max-width: 550px) {
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .sell-page {
+
+                padding: 35px 5%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav>
+
+    <div class="logo">
+        🌱 FarmWise
+    </div>
+
+
+    <a href="{{ url_for('farmer') }}">
+        ← Farmer Dashboard
+    </a>
+
+</nav>
+
+
+
+<!-- =========================================
+     SELL PAGE
+========================================= -->
+
+<section class="sell-page">
+
+
+    <div class="sell-container">
+
+
+        <!-- =====================================
+             LEFT IMAGE
+        ====================================== -->
+
+        <div class="sell-image">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/crop_field.svg'
+                ) }}"
+                alt="Fresh crops ready to sell">
+
+
+            <div class="image-overlay">
+
+                <h3>
+                    Your Crop. Your Price.
+                </h3>
+
+                <p>
+                    Connect directly with consumers
+                    and get better value for your produce.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             FORM
+        ====================================== -->
+
+        <div class="sell-form-card">
+
+
+            <a
+                href="{{ url_for('farmer') }}"
+                class="back-link">
+
+                ← Back to Farmer Dashboard
+
+            </a>
+
+
+            <p class="tagline">
+                SELL DIRECTLY
+            </p>
+
+
+            <h1>
+                List Your Crop
+            </h1>
+
+
+            <p class="sell-description">
+
+                Tell consumers about your crop,
+                set your desired price and make
+                your produce available in the marketplace.
+
+            </p>
+
+
+
+            <form
+                class="sell-form"
+                action="{{ url_for('add_crop') }}"
+                method="POST"
+                enctype="multipart/form-data">
+
+
+                <!-- =================================
+                     FARMER NAME
+                ================================== -->
+
+                <label for="farmer_name">
+                    Farmer Name
+                </label>
+
+                <input
+                    type="text"
+                    id="farmer_name"
+                    name="farmer_name"
+                    placeholder="Enter your name"
+                    required>
+
+
+
+                <!-- =================================
+                     CROP + CATEGORY
+                ================================== -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="crop">
+                            Crop Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="crop"
+                            name="crop"
+                            placeholder="Example: Tomato"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select
+                            id="category"
+                            name="category"
+                            required>
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Vegetable">
+                                Vegetables
+                            </option>
+
+                            <option value="Fruit">
+                                Fruits
+                            </option>
+
+                            <option value="Grain">
+                                Grains
+                            </option>
+
+                            <option value="Pulse">
+                                Pulses
+                            </option>
+
+                            <option value="Spice">
+                                Spices
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     QUANTITY + PRICE
+                ================================== -->
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label for="quantity">
+                            Quantity Available (kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            min="1"
+                            step="0.1"
+                            placeholder="Example: 100"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="price">
+                            Desired Price (₹ / kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            min="1"
+                            step="0.01"
+                            placeholder="Example: 40"
+                            required>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================
+                     LOCATION
+                ================================== -->
+
+                <label for="location">
+                    Farm Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Example: Bengaluru">
+
+
+
+                <!-- =================================
+                     DESCRIPTION
+                ================================== -->
+
+                <label for="description">
+                    Crop Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Tell consumers about your crop. Example: Freshly harvested organic tomatoes..."
+                ></textarea>
+
+
+
+                <!-- =================================
+                     IMAGE UPLOAD
+                ================================== -->
+
+                <label>
+                    Crop Image
+                </label>
+
+
+                <div class="upload-box">
+
+
+                    <div class="upload-icon">
+                        📷
+                    </div>
+
+
+                    <p>
+                        Upload a photo of your crop
+                    </p>
+
+
+                    <small>
+                        JPG, JPEG, PNG or WEBP
+                    </small>
+
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required>
+
+
+                    <img
+                        id="imagePreview"
+                        alt="Crop preview">
+
+                </div>
+
+
+
+                <!-- =================================
+                     SUBMIT
+                ================================== -->
+
+                <button
+                    type="submit"
+                    class="sell-button">
+
+                    🌾 List Crop for Sale
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================
+     IMAGE PREVIEW JAVASCRIPT
+========================================= -->
+
+<script>
+
+    const imageInput =
+        document.getElementById("image");
+
+    const imagePreview =
+        document.getElementById("imagePreview");
+
+
+    imageInput.addEventListener(
+        "change",
+        function () {
+
+            const file =
+                this.files[0];
+
+
+            if (file) {
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function (event) {
+
+                        imagePreview.src =
+                            event.target.result;
+
+                        imagePreview.style.display =
+                            "block";
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
+```

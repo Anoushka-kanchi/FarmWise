@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Consumer Marketplace</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for(
+              'static',
+              filename='style.css'
+          ) }}">
+
+</head>
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        🌱 FarmWise
+    </div>
+
+    <a href="{{ url_for('home') }}">
+        Home
+    </a>
+
+</nav>
+
+
+<section class="consumer-page">
+
+
+    <div class="consumer-heading">
+
+        <p class="tagline">
+            CONSUMER MARKETPLACE
+        </p>
+
+        <h1>
+            Fresh Crops From Farmers
+        </h1>
+
+        <p>
+            Buy directly from farmers
+            at the prices they set.
+        </p>
+
+    </div>
+
+
+    {% if crops %}
+
+
+    <div class="crop-grid">
+
+
+        {% for crop in crops %}
+
+
+        <div class="crop-card">
+
+
+            <div class="crop-image">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/crops.jpg'
+                    ) }}">
+
+                <span>
+                    Fresh
+                </span>
+
+            </div>
+
+
+            <div class="crop-info">
+
+                <h2>
+                    {{ crop.crop }}
+                </h2>
+
+                <p class="farmer-name">
+                    👨‍🌾 {{ crop.farmer_name }}
+                </p>
+
+                <p>
+                    Available:
+                    <strong>
+                        {{ crop.quantity }} kg
+                    </strong>
+                </p>
+
+
+                <div class="crop-bottom">
+
+                    <strong class="crop-price">
+                        ₹{{ crop.price }}/kg
+                    </strong>
+
+
+                    <form
+                        action="{{ url_for(
+                            'buy_crop',
+                            crop_id=crop.id
+                        ) }}"
+                        method="POST">
+
+                        <button
+                            type="submit">
+
+                            Buy Now
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="empty">
+
+        <h2>
+            No crops available yet 🌱
+        </h2>
+
+        <p>
+            Farmers haven't listed any crops.
+            Check back soon!
+        </p>
+
+    </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+</body>
+
+</html>

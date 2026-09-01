@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#B0E0E6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cropGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#388E3C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1B5E20;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="cropRows" patternUnits="userSpaceOnUse" width="30" height="400">
+      <line x1="15" y1="0" x2="15" y2="400" stroke="#2E7D32" stroke-width="1" opacity="0.6"/>
+    </pattern>
+  </defs>
+  
+  <!-- Sky with clouds -->
+  <rect width="600" height="350" fill="url(#skyGrad)"/>
+  
+  <!-- Clouds -->
+  <ellipse cx="100" cy="80" rx="70" ry="40" fill="rgba(255,255,255,0.9)"/>
+  <ellipse cx="150" cy="90" rx="60" ry="35" fill="rgba(255,255,255,0.85)"/>
+  <ellipse cx="500" cy="120" rx="80" ry="45" fill="rgba(255,255,255,0.8)"/>
+  <ellipse cx="550" cy="130" rx="65" ry="38" fill="rgba(255,255,255,0.75)"/>
+  
+  <!-- Sun -->
+  <circle cx="550" cy="60" r="40" fill="#FFD700" opacity="0.9"/>
+  <circle cx="550" cy="60" r="50" fill="#FFA500" opacity="0.3"/>
+  
+  <!-- Main crop field - multiple rows -->
+  <rect y="350" width="600" height="250" fill="url(#cropGrad)"/>
+  <rect y="350" width="600" height="250" fill="url(#cropRows)"/>
+  
+  <!-- Foreground crop rows (darker, more detailed) -->
+  <g opacity="1">
+    <line x1="0" y1="380" x2="600" y2="380" stroke="#2E7D32" stroke-width="2"/>
+    <line x1="0" y1="395" x2="600" y2="395" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="410" x2="600" y2="410" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="425" x2="600" y2="425" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="440" x2="600" y2="440" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="455" x2="600" y2="455" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="470" x2="600" y2="470" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="485" x2="600" y2="485" stroke="#2E7D32" stroke-width="1.5"/>
+    <line x1="0" y1="500" x2="600" y2="500" stroke="#1B5E20" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Row gaps with darker soil -->
+  <g opacity="0.6">
+    <rect x="0" y="370" width="600" height="8" fill="#6D4C41"/>
+    <rect x="0" y="385" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="400" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="415" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="430" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="445" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="460" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="475" width="600" height="6" fill="#6D4C41"/>
+    <rect x="0" y="490" width="600" height="6" fill="#6D4C41"/>
+  </g>
+  
+  <!-- Perspective lines to create depth -->
+  <line x1="150" y1="350" x2="100" y2="550" stroke="#1B5E20" stroke-width="2" opacity="0.4"/>
+  <line x1="300" y1="350" x2="300" y2="600" stroke="#1B5E20" stroke-width="2" opacity="0.4"/>
+  <line x1="450" y1="350" x2="500" y2="550" stroke="#1B5E20" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Crop plants detail in foreground -->
+  <g opacity="0.8">
+    <!-- Left side plants -->
+    <g transform="translate(50, 500)">
+      <path d="M -5 0 Q -8 -10 -5 -20 Q 0 -15 5 -20 Q 8 -10 5 0" fill="#2E7D32"/>
+      <path d="M -3 -5 Q -6 -12 -3 -18 Q 0 -10 3 -18 Q 6 -12 3 -5" fill="#43A047"/>
+    </g>
+    <g transform="translate(100, 510)">
+      <path d="M -5 0 Q -8 -10 -5 -20 Q 0 -15 5 -20 Q 8 -10 5 0" fill="#2E7D32"/>
+      <path d="M -3 -5 Q -6 -12 -3 -18 Q 0 -10 3 -18 Q 6 -12 3 -5" fill="#43A047"/>
+    </g>
+    
+    <!-- Right side plants -->
+    <g transform="translate(500, 505)">
+      <path d="M -5 0 Q -8 -10 -5 -20 Q 0 -15 5 -20 Q 8 -10 5 0" fill="#2E7D32"/>
+      <path d="M -3 -5 Q -6 -12 -3 -18 Q 0 -10 3 -18 Q 6 -12 3 -5" fill="#43A047"/>
+    </g>
+    <g transform="translate(550, 515)">
+      <path d="M -5 0 Q -8 -10 -5 -20 Q 0 -15 5 -20 Q 8 -10 5 0" fill="#2E7D32"/>
+      <path d="M -3 -5 Q -6 -12 -3 -18 Q 0 -10 3 -18 Q 6 -12 3 -5" fill="#43A047"/>
+    </g>
+  </g>
+  
+  <!-- Middle ground with softer focus -->
+  <g opacity="0.5">
+    <rect y="520" width="600" height="80" fill="#267300"/>
+    <line x1="0" y1="540" x2="600" y2="540" stroke="#1B5E20" stroke-width="1"/>
+    <line x1="0" y1="555" x2="600" y2="555" stroke="#1B5E20" stroke-width="1"/>
+    <line x1="0" y1="570" x2="600" y2="570" stroke="#1B5E20" stroke-width="1"/>
+  </g>
+  
+  <!-- Background with atmospheric perspective -->
+  <g opacity="0.3">
+    <rect y="550" width="600" height="50" fill="#4CAF50"/>
+  
+  <!-- Crop plants row 1 -->
+  <!-- (Removed for more realistic look - crop rows are shown via patterns and lines) -->
+  
+</svg>

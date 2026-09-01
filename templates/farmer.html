@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Farmer Portal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        🌱 FarmWise
+    </div>
+
+    <a href="{{ url_for('home') }}">
+        Home
+    </a>
+
+</nav>
+
+
+<section class="dashboard">
+
+    <div class="dashboard-container">
+
+        <!-- LEFT: CROP IMAGE -->
+        <div class="dashboard-image">
+            <img 
+                src="{{ url_for('static', filename='images/farmer.jpg') }}"
+                alt="Fresh crops from farm"
+                class="dashboard-crop-image">
+            <div class="image-caption">
+                <h3>Grow • Harvest • Sell</h3>
+                <p>Direct from your farm to consumers</p>
+            </div>
+        </div>
+
+        <!-- RIGHT: CONTENT + CARDS -->
+        <div class="dashboard-content">
+
+            <div class="dashboard-header">
+                <p class="tagline">
+                    FARMER PORTAL
+                </p>
+
+                <h1>
+                    Welcome, Farmer 🌾
+                </h1>
+
+                <p>
+                    Sell your crops or purchase
+                    farming products.
+                </p>
+            </div>
+
+            <!-- CARDS SIDE BY SIDE -->
+            <div class="farmer-options">
+
+                <!-- SELL -->
+                <a href="{{ url_for('farmer_sell') }}"
+                   class="dashboard-card">
+
+                    <div class="big-icon">
+                        🌾
+                    </div>
+
+                    <h2>
+                        Sell Crops
+                    </h2>
+
+                    <p>
+                        List your crops, choose your
+                        quantity and set the price
+                        you want.
+                    </p>
+
+                    <span>
+                        Start Selling →
+                    </span>
+
+                </a>
+
+                <!-- BUY -->
+                <a href="{{ url_for('farmer_buy') }}"
+                   class="dashboard-card">
+
+                    <div class="big-icon">
+                        🚜
+                    </div>
+
+                    <h2>
+                        Buy Farming Products
+                    </h2>
+
+                    <p>
+                        Purchase tractors, insecticides,
+                        fertilizers, seeds and other
+                        farming products.
+                    </p>
+
+                    <span>
+                        Browse Products →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CURRENT LISTINGS -->
+
+    <section class="my-listings">
+
+        <h2>
+            Your Marketplace Listings
+        </h2>
+
+
+        {% if listings %}
+
+        <div class="listing-grid">
+
+            {% for item in listings %}
+
+            <div class="listing-card">
+
+                <h3>
+                    {{ item.crop }}
+                </h3>
+
+                <p>
+                    Quantity:
+                    {{ item.quantity }} kg
+                </p>
+
+                <strong>
+                    ₹{{ item.price }}/kg
+                </strong>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <p>
+            You haven't listed any crops yet.
+        </p>
+
+        {% endif %}
+
+    </section>
+
+</section>
+
+
+</body>
+
+</html>
