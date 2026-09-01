@@ -4,7 +4,12 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 
 # Create database engine
-engine = create_engine('sqlite:///farmwise.db')
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATABASE_URL = f"sqlite:///{BASE_DIR / 'farmwise.db'}"
+
+engine = create_engine(DATABASE_URL)
 
 # Create base class for models
 Base = declarative_base()

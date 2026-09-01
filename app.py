@@ -3,10 +3,13 @@ from flask import (
     render_template,
     request,
     redirect,
-    url_for
+    url_for,
+    jsonify
 )
 
 from werkzeug.utils import secure_filename
+
+from flask_cors import CORS
 
 import os
 
@@ -22,6 +25,9 @@ from database.db import (
 
 
 app = Flask(__name__)
+
+# Enable CORS for Streamlit integration
+CORS(app)
 
 
 # ==========================================
@@ -304,6 +310,157 @@ def buy_crop(crop_id):
     return redirect(
         url_for("consumer")
     )
+
+
+# ==========================================
+# API ENDPOINTS FOR STREAMLIT
+# ==========================================
+
+@app.route("/api/crops", methods=["GET"])
+def api_get_crops():
+    """Get all crop listings"""
+    db = SessionLocal()
+    crops = db.query(CropListing).all()
+    db.close()
+    
+    crops_data = []
+    for crop in crops:
+        crops_data.append({
+            "id": crop.id,
+            "farmer_name": crop.farmer_name,
+            "crop": crop.crop,
+            "category": crop.category,
+            "price": crop.price,
+            "quantity": crop.quantity,
+            "location": crop.location,
+            "description": crop.description,
+            "image_filename": crop.image_filename,
+            "date_listed": crop.date_listed.isoformat() if crop.date_listed else None
+        })
+    
+    return jsonify(crops_data)
+
+
+@app.route("/api/crops/<int:crop_id>", methods=["GET"])
+def api_get_crop(crop_id):
+    """Get single crop listing"""
+    db = SessionLocal()
+    crop = db.query(CropListing).filter(CropListing.id == crop_id).first()
+    db.close()
+    
+    if not crop:
+        return jsonify({"error": "Crop not found"}), 404
+    
+    return jsonify({
+        "id": crop.id,
+        "farmer_name": crop.farmer_name,
+        "crop": crop.crop,
+        "category": crop.category,
+        "price": crop.price,
+        "quantity": crop.quantity,
+        "location": crop.location,
+        "description": crop.description,
+        "image_filename": crop.image_filename,
+        "date_listed": crop.date_listed.isoformat() if crop.date_listed else None
+    })
+
+
+@app.route("/api/crops", methods=["POST"])
+def api_add_crop():
+    """Add new crop listing via API"""
+    data = request.get_json()
+    
+    farmer_name = data.get("farmer_name")
+    crop = data.get("crop")
+    category = data.get("category")
+    quantity = data.get("quantity")
+    price = data.get("price")
+    location = data.get("location")
+    description = data.get("description")
+    
+    # Validate required fields
+    if not all([farmer_name, crop, quantity, price]):
+        return jsonify({"error": "Missing required fields"}), 400
+    
+    try:
+        quantity = float(quantity)
+        price = float(price)
+    except ValueError:
+        return jsonify({"error": "Quantity and Price must be valid numbers"}), 400
+    
+    db = SessionLocal()
+    
+    new_crop = CropListing(
+        farmer_name=farmer_name,
+        crop=crop,
+        category=category,
+        quantity=quantity,
+        price=price,
+        location=location,
+        description=description,
+        image_filename=data.get("image_filename")
+    )
+    
+    db.add(new_crop)
+    db.commit()
+    crop_id = new_crop.id
+    db.close()
+    
+    return jsonify({
+        "message": "Crop added successfully",
+        "crop_id": crop_id
+    }), 201
+
+
+@app.route("/api/products", methods=["GET"])
+def api_get_products():
+    """Get all farming products"""
+    db = SessionLocal()
+    products = db.query(FarmingProduct).all()
+    db.close()
+    
+    products_data = []
+    for product in products:
+        products_data.append({
+            "id": product.id,
+            "title": product.title,
+            "category": product.category,
+            "price": product.price,
+            "quantity": product.quantity,
+            "seller": product.seller,
+            "description": product.description,
+            "image_filename": product.image_filename
+        })
+    
+    return jsonify(products_data)
+
+
+@app.route("/api/buy", methods=["POST"])
+def api_buy_product():
+    """Record a purchase"""
+    data = request.get_json()
+    
+    crop_id = data.get("crop_id")
+    quantity = data.get("quantity", 1)
+    
+    db = SessionLocal()
+    crop = db.query(CropListing).filter(CropListing.id == crop_id).first()
+    
+    if not crop:
+        db.close()
+        return jsonify({"error": "Crop not found"}), 404
+    
+    # Update quantity
+    crop.quantity -= quantity
+    db.commit()
+    db.close()
+    
+    return jsonify({
+        "message": "Purchase successful",
+        "crop": crop.crop,
+        "seller": crop.farmer_name,
+        "quantity": quantity
+    }), 200
 
 
 # ==========================================
