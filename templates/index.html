@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmAssist AI | Smart Farming Assistant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🌾</div>
+
+            <div>
+                <h1>AI Farming Assistant</h1>
+                <p>Smart agricultural guidance</p>
+            </div>
+        </div>
+
+
+        <nav class="side-navigation">
+
+            <button class="nav-card active" onclick="scrollToSection('homeSection')">
+                <div class="nav-icon">🌾</div>
+                <div>
+                    <h3>Smart Farming</h3>
+                    <p>Get practical AI-powered farming guidance.</p>
+                </div>
+            </button>
+
+
+            <button class="nav-card" onclick="scrollToSection('cropSection')">
+                <div class="nav-icon">🌱</div>
+                <div>
+                    <h3>Crop Advice</h3>
+                    <p>Ask about crop selection and cultivation.</p>
+                </div>
+            </button>
+
+
+            <button class="nav-card" onclick="scrollToSection('problemSection')">
+                <div class="nav-icon">🔍</div>
+                <div>
+                    <h3>Crop Problems</h3>
+                    <p>Describe symptoms and explore possible causes.</p>
+                </div>
+            </button>
+
+
+            <button class="nav-card" onclick="scrollToSection('managementSection')">
+                <div class="nav-icon">💧</div>
+                <div>
+                    <h3>Farm Management</h3>
+                    <p>Get help with irrigation and crop care.</p>
+                </div>
+            </button>
+
+        </nav>
+
+
+        <div class="online-status">
+            <span class="online-dot"></span>
+            AI Assistant Online
+        </div>
+
+
+        <div class="sidebar-image">
+            <div class="image-overlay">
+                <span>🌱</span>
+                <strong>Grow smarter.</strong>
+                <small>Farm better.</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <span class="top-label">SMART AGRICULTURE</span>
+                <h2>Your intelligent farming companion</h2>
+            </div>
+
+            <div class="top-status">
+                <span>🌱</span>
+                FarmAssist AI
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= HOME / HERO ================= -->
+
+        <section id="homeSection" class="hero-section">
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+                    🌾 AI-Powered Farming
+                </div>
+
+                <h1>
+                    Smarter decisions.
+                    <span>Better harvests.</span>
+                </h1>
+
+                <p>
+                    Get simple, practical and personalized farming guidance
+                    using FarmAssist AI.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button onclick="scrollToSection('chatSection')" class="primary-btn">
+                        🤖 Ask FarmAssist AI
+                    </button>
+
+                    <button onclick="scrollToSection('cropSection')" class="secondary-btn">
+                        🌱 Explore Crop Advice
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85"
+                    alt="Green agricultural field"
+                >
+
+                <div class="floating-card card-one">
+                    <span>🌱</span>
+                    <div>
+                        <strong>Healthy Crops</strong>
+                        <small>AI assisted monitoring</small>
+                    </div>
+                </div>
+
+                <div class="floating-card card-two">
+                    <span>💧</span>
+                    <div>
+                        <strong>Smart Irrigation</strong>
+                        <small>Efficient water use</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= QUICK FEATURES ================= -->
+
+        <section class="feature-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-label">WHAT WE OFFER</span>
+                    <h2>Everything you need for smarter farming</h2>
+                </div>
+
+                <p>
+                    Simple AI tools designed to help farmers make better decisions.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+
+                <div class="feature-card" onclick="scrollToSection('chatSection')">
+
+                    <div class="feature-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=700&q=80"
+                            alt="Farmer working in field"
+                        >
+                    </div>
+
+                    <div class="feature-body">
+                        <span class="feature-icon">🤖</span>
+                        <h3>AI Farming Assistant</h3>
+                        <p>
+                            Ask questions about crops, pests, irrigation,
+                            fertilizers and farming practices.
+                        </p>
+
+                        <span class="learn-more">
+                            Ask AI →
+                        </span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature-card" onclick="scrollToSection('cropSection')">
+
+                    <div class="feature-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=700&q=80"
+                            alt="Agricultural crops"
+                        >
+                    </div>
+
+                    <div class="feature-body">
+                        <span class="feature-icon">🌱</span>
+                        <h3>Crop Recommendation</h3>
+                        <p>
+                            Find suitable crops based on soil,
+                            temperature, rainfall and water availability.
+                        </p>
+
+                        <span class="learn-more">
+                            Find crops →
+                        </span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature-card" onclick="scrollToSection('problemSection')">
+
+                    <div class="feature-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=700&q=80"
+                            alt="Healthy plants"
+                        >
+                    </div>
+
+                    <div class="feature-body">
+                        <span class="feature-icon">🔍</span>
+                        <h3>Crop Problem Analysis</h3>
+                        <p>
+                            Describe crop symptoms and get possible causes
+                            and practical next steps.
+                        </p>
+
+                        <span class="learn-more">
+                            Analyze problem →
+                        </span>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CHAT ================= -->
+
+        <section id="chatSection" class="tool-section chat-section">
+
+            <div class="tool-header">
+
+                <div>
+                    <span class="section-label">AI ASSISTANT</span>
+                    <h2>🌾 FarmAssist AI Chat</h2>
+                    <p>
+                        Ask your farming question in simple language.
+                    </p>
+                </div>
+
+                <div class="ai-badge">
+                    <span></span>
+                    AI Online
+                </div>
+
+            </div>
+
+
+            <div class="chat-box">
+
+                <div id="chatMessages" class="chat-messages">
+
+                    <div class="message bot-message">
+
+                        <div class="message-avatar">🌾</div>
+
+                        <div class="message-content">
+
+                            <div class="message-name">
+                                FarmAssist AI
+                            </div>
+
+                            <div class="message-text">
+                                Hello! I'm FarmAssist AI. 🌱
+                                <br><br>
+                                I can help you with:
+                                <br><br>
+                                🌱 Crop selection<br>
+                                💧 Irrigation<br>
+                                🌾 Fertilizers<br>
+                                🐛 Pests<br>
+                                🔍 Crop problems
+                                <br><br>
+                                What would you like help with today?
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="suggestions">
+
+                    <button onclick="sendSuggestion('Which crop should I grow?')">
+                        🌱 Which crop should I grow?
+                    </button>
+
+                    <button onclick="sendSuggestion('How often should I water my crops?')">
+                        💧 How often should I water?
+                    </button>
+
+                    <button onclick="sendSuggestion('My crop has insects. What should I do?')">
+                        🐛 My crop has insects
+                    </button>
+
+                    <button onclick="sendSuggestion('How can I improve crop yield?')">
+                        🌾 Improve crop yield
+                    </button>
+
+                </div>
+
+
+                <div class="chat-input-area">
+
+                    <input
+                        type="text"
+                        id="chatInput"
+                        placeholder="Ask your farming question..."
+                        autocomplete="off"
+                    >
+
+                    <button id="sendButton" onclick="sendMessage()">
+                        Send 🌱
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CROP RECOMMENDATION ================= -->
+
+        <section id="cropSection" class="tool-section">
+
+            <div class="tool-header">
+
+                <div>
+                    <span class="section-label">SMART CROP SELECTION</span>
+                    <h2>🌱 Crop Recommendation</h2>
+                    <p>
+                        Tell us about your farm and let AI suggest suitable crops.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="crop-tool">
+
+                <div class="crop-tool-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=900&q=85"
+                        alt="Crop field"
+                    >
+
+                    <div class="crop-image-text">
+                        <strong>Choose the right crop.</strong>
+                        <span>Grow according to your farm conditions.</span>
+                    </div>
+
+                </div>
+
+
+                <div class="crop-form">
+
+                    <div class="form-group">
+                        <label>🌍 Soil Type</label>
+
+                        <select id="soilType">
+                            <option value="">Select soil type</option>
+                            <option value="Loamy">Loamy</option>
+                            <option value="Clay">Clay</option>
+                            <option value="Sandy">Sandy</option>
+                            <option value="Black Soil">Black Soil</option>
+                            <option value="Red Soil">Red Soil</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label>🌡️ Temperature</label>
+
+                            <input
+                                id="temperature"
+                                type="number"
+                                placeholder="e.g. 28"
+                            >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>🌧️ Rainfall</label>
+
+                            <select id="rainfall">
+                                <option value="">Select</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label>📅 Season</label>
+
+                            <select id="season">
+                                <option value="">Select season</option>
+                                <option value="Kharif">Kharif</option>
+                                <option value="Rabi">Rabi</option>
+                                <option value="Summer">Summer</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>💧 Water Availability</label>
+
+                            <select id="waterAvailability">
+                                <option value="">Select</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <button class="action-btn" onclick="recommendCrop()">
+                        🌱 Recommend Crops
+                    </button>
+
+
+                    <div id="cropResult" class="result-box"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CROP PROBLEM ================= -->
+
+        <section id="problemSection" class="tool-section">
+
+            <div class="tool-header">
+
+                <div>
+                    <span class="section-label">CROP HEALTH</span>
+                    <h2>🔍 Crop Problem Analysis</h2>
+                    <p>
+                        Describe what you see on your crop and get possible causes.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="problem-tool">
+
+                <div class="problem-info">
+
+                    <div class="problem-icon">
+                        🌿
+                    </div>
+
+                    <h3>Something wrong with your crop?</h3>
+
+                    <p>
+                        Tell FarmAssist AI about the crop and its symptoms.
+                        The AI will help you understand possible causes and
+                        what you should check next.
+                    </p>
+
+
+                    <div class="check-list">
+
+                        <div>✓ Yellow leaves</div>
+                        <div>✓ Brown spots</div>
+                        <div>✓ Insects</div>
+                        <div>✓ Wilting</div>
+                        <div>✓ Poor growth</div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="problem-form">
+
+                    <div class="form-group">
+
+                        <label>🌱 Crop</label>
+
+                        <input
+                            id="cropName"
+                            type="text"
+                            placeholder="e.g. Tomato"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>🔍 Describe the symptoms</label>
+
+                        <textarea
+                            id="symptoms"
+                            rows="7"
+                            placeholder="Example: My tomato leaves are turning yellow and have small brown spots..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button class="action-btn" onclick="analyzeCrop()">
+                        🔍 Analyze Crop Problem
+                    </button>
+
+
+                    <div id="analysisResult" class="result-box"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FARM MANAGEMENT ================= -->
+
+        <section id="managementSection" class="tool-section">
+
+            <div class="tool-header">
+
+                <div>
+                    <span class="section-label">FARM MANAGEMENT</span>
+                    <h2>💧 Better Farm Management</h2>
+                    <p>
+                        Simple practices that can help improve crop health.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="management-grid">
+
+                <div class="management-card">
+
+                    <div class="management-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=700&q=80"
+                            alt="Watering crops"
+                        >
+
+                    </div>
+
+                    <div class="management-content">
+
+                        <span>💧</span>
+
+                        <h3>Smart Irrigation</h3>
+
+                        <p>
+                            Keep soil moisture balanced. Avoid both
+                            overwatering and long dry periods.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="management-card">
+
+                    <div class="management-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1598512752271-33f913a5af13?auto=format&fit=crop&w=700&q=80"
+                            alt="Growing vegetables"
+                        >
+
+                    </div>
+
+                    <div class="management-content">
+
+                        <span>🌾</span>
+
+                        <h3>Crop Care</h3>
+
+                        <p>
+                            Monitor your plants regularly for nutrient
+                            problems, pests and diseases.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="management-card">
+
+                    <div class="management-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1523742815371-7f14f4b3f3e4?auto=format&fit=crop&w=700&q=80"
+                            alt="Agriculture field"
+                        >
+
+                    </div>
+
+                    <div class="management-content">
+
+                        <span>🌱</span>
+
+                        <h3>Healthy Soil</h3>
+
+                        <p>
+                            Maintain soil fertility using suitable
+                            fertilizers and organic matter.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <div class="footer-logo">
+                🌾 FarmAssist AI
+            </div>
+
+            <p>
+                AI-powered guidance for smarter and more sustainable farming.
+            </p>
+
+            <span>
+                Smart Farming Project • 2026
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    // ==========================================
+    // NAVIGATION
+    // ==========================================
+
+    function scrollToSection(sectionId) {
+
+        const section = document.getElementById(sectionId);
+
+        if (section) {
+
+            section.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+        document.querySelectorAll(".nav-card").forEach(card => {
+            card.classList.remove("active");
+        });
+
+        event?.currentTarget?.classList.add("active");
+    }
+
+
+
+    // ==========================================
+    // CHAT
+    // ==========================================
+
+    const chatInput = document.getElementById("chatInput");
+
+    chatInput.addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+
+    });
+
+
+    function sendSuggestion(message) {
+
+        chatInput.value = message;
+
+        sendMessage();
+
+    }
+
+
+    async function sendMessage() {
+
+        const message = chatInput.value.trim();
+
+        if (!message) {
+            return;
+        }
+
+
+        addMessage(message, "user");
+
+        chatInput.value = "";
+
+        const thinking = addThinkingMessage();
+
+
+        try {
+
+            const response = await fetch("/api/chat", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: message
+                })
+
+            });
+
+
+            const data = await response.json();
+
+            removeThinkingMessage(thinking);
+
+
+            if (data.response) {
+
+                addMessage(data.response, "bot");
+
+            } else if (data.error) {
+
+                addMessage(
+                    "Sorry, I couldn't process your question. Please try again.",
+                    "bot"
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            removeThinkingMessage(thinking);
+
+            console.error(error);
+
+            addMessage(
+                "Unable to connect to FarmAssist AI. Please check that the Flask server is running.",
+                "bot"
+            );
+
+        }
+
+    }
+
+
+
+    function addMessage(text, type) {
+
+        const messages = document.getElementById("chatMessages");
+
+        const message = document.createElement("div");
+
+        message.className =
+            type === "user"
+            ? "message user-message"
+            : "message bot-message";
+
+
+        const avatar =
+            type === "user"
+            ? "👨‍🌾"
+            : "🌾";
+
+
+        const name =
+            type === "user"
+            ? "You"
+            : "FarmAssist AI";
+
+
+        message.innerHTML = `
+
+            <div class="message-avatar">
+                ${avatar}
+            </div>
+
+            <div class="message-content">
+
+                <div class="message-name">
+                    ${name}
+                </div>
+
+                <div class="message-text">
+                    ${formatText(text)}
+                </div>
+
+            </div>
+
+        `;
+
+
+        messages.appendChild(message);
+
+        scrollChatToBottom();
+
+        return message;
+
+    }
+
+
+
+    function addThinkingMessage() {
+
+        const messages = document.getElementById("chatMessages");
+
+        const message = document.createElement("div");
+
+        message.className = "message bot-message thinking-message";
+
+        message.innerHTML = `
+
+            <div class="message-avatar">
+                🌾
+            </div>
+
+            <div class="message-content">
+
+                <div class="message-name">
+                    FarmAssist AI
+                </div>
+
+                <div class="thinking">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    FarmAssist AI is thinking...
+                </div>
+
+            </div>
+
+        `;
+
+        messages.appendChild(message);
+
+        scrollChatToBottom();
+
+        return message;
+
+    }
+
+
+
+    function removeThinkingMessage(element) {
+
+        if (element) {
+            element.remove();
+        }
+
+    }
+
+
+
+    function formatText(text) {
+
+        if (!text) {
+            return "";
+        }
+
+
+        let formatted = String(text);
+
+
+        formatted = formatted.replace(
+            /```[\s\S]*?```/g,
+            ""
+        );
+
+
+        formatted = formatted.replace(
+            /\*\*(.*?)\*\*/g,
+            "<strong>$1</strong>"
+        );
+
+
+        formatted = formatted.replace(
+            /^### (.*)$/gm,
+            "<h4>$1</h4>"
+        );
+
+
+        formatted = formatted.replace(
+            /^## (.*)$/gm,
+            "<h3>$1</h3>"
+        );
+
+
+        formatted = formatted.replace(
+            /^# (.*)$/gm,
+            "<h2>$1</h2>"
+        );
+
+
+        formatted = formatted.replace(
+            /^[-•] (.*)$/gm,
+            "• $1"
+        );
+
+
+        formatted = formatted.replace(
+            /\n/g,
+            "<br>"
+        );
+
+
+        return formatted;
+
+    }
+
+
+
+    function scrollChatToBottom() {
+
+        const messages = document.getElementById("chatMessages");
+
+        setTimeout(() => {
+
+            messages.scrollTop = messages.scrollHeight;
+
+        }, 50);
+
+    }
+
+
+
+    // ==========================================
+    // CROP RECOMMENDATION
+    // ==========================================
+
+    async function recommendCrop() {
+
+        const soilType =
+            document.getElementById("soilType").value;
+
+        const temperature =
+            document.getElementById("temperature").value;
+
+        const rainfall =
+            document.getElementById("rainfall").value;
+
+        const season =
+            document.getElementById("season").value;
+
+        const waterAvailability =
+            document.getElementById("waterAvailability").value;
+
+        const result =
+            document.getElementById("cropResult");
+
+
+        if (
+            !soilType ||
+            !temperature ||
+            !rainfall ||
+            !season ||
+            !waterAvailability
+        ) {
+
+            result.innerHTML =
+                "⚠️ Please fill in all farm details.";
+
+            result.classList.add("show");
+
+            return;
+
+        }
+
+
+        result.innerHTML =
+            "🌱 FarmAssist AI is analyzing your farm...";
+
+        result.classList.add("show");
+
+
+        try {
+
+            const response = await fetch(
+                "/api/recommend-crops",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        soil_type: soilType,
+
+                        temperature: temperature,
+
+                        rainfall: rainfall,
+
+                        season: season,
+
+                        water_availability:
+                            waterAvailability
+
+                    })
+
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (data.recommendations) {
+
+                result.innerHTML =
+                    formatText(data.recommendations);
+
+            }
+
+            else {
+
+                result.innerHTML =
+                    "⚠️ " +
+                    (data.error ||
+                    "Unable to generate recommendations.");
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            result.innerHTML =
+                "⚠️ Unable to connect to FarmAssist AI.";
+
+        }
+
+    }
+
+
+
+    // ==========================================
+    // CROP PROBLEM ANALYSIS
+    // ==========================================
+
+    async function analyzeCrop() {
+
+        const crop =
+            document.getElementById("cropName").value.trim();
+
+        const symptoms =
+            document.getElementById("symptoms").value.trim();
+
+        const result =
+            document.getElementById("analysisResult");
+
+
+        if (!crop || !symptoms) {
+
+            result.innerHTML =
+                "⚠️ Please enter the crop name and symptoms.";
+
+            result.classList.add("show");
+
+            return;
+
+        }
+
+
+        result.innerHTML =
+            "🔍 FarmAssist AI is analyzing the crop...";
+
+        result.classList.add("show");
+
+
+        try {
+
+            const response = await fetch(
+                "/api/analyze-crop",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        crop: crop,
+
+                        symptoms: symptoms
+
+                    })
+
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (data.analysis) {
+
+                result.innerHTML =
+                    formatText(data.analysis);
+
+            }
+
+            else {
+
+                result.innerHTML =
+                    "⚠️ " +
+                    (data.error ||
+                    "Unable to analyze the crop.");
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            result.innerHTML =
+                "⚠️ Unable to connect to FarmAssist AI.";
+
+        }
+
+    }
+
+
+
+    // ==========================================
+    // PAGE LOAD
+    // ==========================================
+
+    window.addEventListener("load", function() {
+
+        document.body.classList.add("loaded");
+
+    });
+
+</script>
+
+</body>
+</html>
