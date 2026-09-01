@@ -338,7 +338,7 @@ def clean_response(text):
 # ASK FARMASSIST AI
 # ============================================================
 
-def ask_ai(question):
+def get_ai_response(question):
 
     if not question or not question.strip():
 
